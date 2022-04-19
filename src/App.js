@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
 import useWebSocket from 'react-use-websocket';
+import Button from '@mui/material/Button';
 
 function App() {
 
@@ -20,10 +20,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={() => sendMessage("help")}>Help</button>
-        <button onClick={() => sendMessage("map")}>Map</button>
-        <button onClick={() => sendMessage("new 1")}>New</button>
-        <button onClick={() => sendMessage("open")}>Open</button>
+        <Button onClick={() => sendMessage("help")}>Help</Button>
+        <Button onClick={() => sendMessage("map")}>Map</Button>
+        <Button onClick={() => sendMessage("new 1")}>New Game</Button>
+        <Button onClick={() => sendMessage("open")}>Open</Button>
       </header>
     </div>
   );
