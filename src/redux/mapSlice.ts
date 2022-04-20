@@ -1,13 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
+
+export const GET_MAP = "GET_MAP";
+export const SET_MAP = "SET_MAP";
+
+export const getMap = createAction(GET_MAP);
 
 export interface MapState {
     count: number,
-    data: Array<Array<string>>
+    data: Array<Array<string>>,
+    post: any
 }
 
 const initialState: MapState = {
     count: 0,
-    data: []
+    data: [],
+    post: undefined
 }
 
 export const mapSlice = createSlice({
@@ -29,11 +36,19 @@ export const mapSlice = createSlice({
         },
         load: (state, action: PayloadAction<Array<Array<string>>>) => {
             state.data = action.payload;
+        },
+        setMap: (state, action: PayloadAction<any>) => {
+            state.post = action.payload;
         }
     },
+    // extraReducers: (builder) => {
+    //     builder.addCase(getMap, (state, action) => {
+    //         state.post = action.payload;
+    //     })
+    // }
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, load } = mapSlice.actions
+export const { increment, decrement, incrementByAmount, load, setMap } = mapSlice.actions
 
 export default mapSlice.reducer

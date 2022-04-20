@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import generateMapArray from './utils/generateMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
-import { increment, load } from './redux/mapSlice';
+import { getMap, increment, load } from './redux/mapSlice';
 
 interface GameAction {
   action: string;
@@ -64,6 +64,7 @@ function App() {
         <Button onClick={() => sendMessage("map")}>Map</Button>
         <Button onClick={() => sendMessage("new 1")}>New Game</Button>
         <Button onClick={() => sendMessage("open 1 2")}>Open</Button>
+        <Button onClick={() => dispatch(getMap())}>Saga</Button>
         <Button onClick={() => dispatch(increment())}>{count}</Button>
         <Map data={data} />
       </header>
