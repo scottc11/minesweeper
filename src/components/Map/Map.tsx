@@ -10,10 +10,12 @@ const Map: FC<MapProps> = (props) => {
     return (
         <div className='map'>
             {
-                props.data.map(row => {
+                props.data.map((row, x) => {
                     return (
-                        <div className='map--row'>
-                            {row.map(tile => <Tile blank={tile} />)}
+                        <div key={x} className='map--row'>
+                            {row.map((tile, y) => {
+                                return <Tile key={y} blank={tile} />;
+                            })}
                         </div>
                     )
                 })
