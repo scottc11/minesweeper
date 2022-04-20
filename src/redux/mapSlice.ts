@@ -7,7 +7,7 @@ export interface MapState {
 
 const initialState: MapState = {
     count: 0,
-    data: new Array()
+    data: []
 }
 
 export const mapSlice = createSlice({

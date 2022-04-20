@@ -2,12 +2,14 @@ import { FC } from 'react';
 
 interface TileProps {
     data: string;
+    x: number;
+    y: number;
 }
 
 const Tile: FC<TileProps> = (props) => {
-    let tileClass = props.data == "o" ? 'blank' : '';
+    let tileClass = props.data === "o" ? 'blank' : '';
     return (
-        <div className={`tile ${tileClass}`}>
+        <div onClick={() => console.log(props.x, props.y)} className={`tile ${tileClass}`}>
             {props.data}
         </div>
     )

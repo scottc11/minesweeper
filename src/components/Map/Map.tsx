@@ -13,7 +13,7 @@ const Map: FC<MapProps> = (props) => {
                     return (
                         <div key={x} className='map--row'>
                             {row.map((data, y) => {
-                                return <Tile key={y} data={data} />;
+                                return <Tile key={y} x={x} y={y} data={data} />;
                             })}
                         </div>
                     )
