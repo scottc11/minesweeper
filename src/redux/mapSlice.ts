@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface MapState {
-    count: number
+    count: number,
+    data: Array<Array<string>>
 }
 
 const initialState: MapState = {
     count: 0,
+    data: new Array()
 }
 
 export const mapSlice = createSlice({
@@ -25,10 +27,13 @@ export const mapSlice = createSlice({
         incrementByAmount: (state, action: PayloadAction<number>) => {
             state.count += action.payload
         },
+        load: (state, action: PayloadAction<Array<Array<string>>>) => {
+            state.data = action.payload;
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = mapSlice.actions
+export const { increment, decrement, incrementByAmount, load } = mapSlice.actions
 
 export default mapSlice.reducer

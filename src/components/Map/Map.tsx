@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Tile } from '../index';
 
 interface MapProps {
-    data: boolean[][];
+    data: string[][];
 }
 
 const Map: FC<MapProps> = (props) => {
@@ -12,8 +12,8 @@ const Map: FC<MapProps> = (props) => {
                 props.data.map((row, x) => {
                     return (
                         <div key={x} className='map--row'>
-                            {row.map((tile, y) => {
-                                return <Tile key={y} blank={tile} />;
+                            {row.map((data, y) => {
+                                return <Tile key={y} data={data} />;
                             })}
                         </div>
                     )

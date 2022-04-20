@@ -6,14 +6,14 @@ import Button from '@mui/material/Button';
 import generateMapArray from './utils/generateMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
-import { increment } from './redux/mapSlice';
+import { increment, load } from './redux/mapSlice';
 
 interface GameAction {
   action: string;
   data: Array<string>;
 }
 
-function parseMapData(data: string) {
+function parseMapData(data: string): Array<Array<string>> {
   let mapData = data.split(`\n`).slice(1);
   mapData.pop();
   console.log(mapData);
@@ -25,10 +25,8 @@ function parseMapData(data: string) {
 
 function App() {
   
-  const { count } = useSelector((state: RootState) => state.map);
+  const { count, data } = useSelector((state: RootState) => state.map);
   const dispatch = useDispatch();
-
-  const mapData = generateMapArray(10, 20);
 
   const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket(
     "wss://hometask.eg1236.com/game1/",
@@ -50,7 +48,7 @@ function App() {
           break;
         case 'map':
           console.log("Map");      // trigger redux action
-          console.log(parseMapData(lastMessage.data));
+          dispatch(load(parseMapData(lastMessage.data)));
           break;
         default:
           console.log("Getting Help");
@@ -67,7 +65,7 @@ function App() {
         <Button onClick={() => sendMessage("new 1")}>New Game</Button>
         <Button onClick={() => sendMessage("open 1 2")}>Open</Button>
         <Button onClick={() => dispatch(increment())}>{count}</Button>
-        <Map data={mapData} />
+        <Map data={data} />
       </header>
     </div>
   );
