@@ -28,11 +28,20 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tile {
+  display: inline-block;
+  border: solid;
+  border-width: 1px;
+  width: 30px;
+  height: 30px;
+}
+
+.map--row {
+  display: block;
+  margin: 0;
+  line-height: 0;
+}
+
+.blank {
+  background-color: #61dafb;
 }
