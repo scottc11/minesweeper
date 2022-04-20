@@ -36,9 +36,13 @@ function* webSocketListener(): any { // note: you could pass an "action" param h
             switch (target) {
                 case 'new':
                     console.log(socketMessage.data);
+                    yield webSocket.send("map");
                     break;
                 case 'open':
                     console.log(socketMessage.data);
+                    // if "You Lose", dispatch END GAME action
+                    // else, send for map
+                    yield webSocket.send("map");
                     break;
                 case 'map':
                     console.log(socketMessage.data);

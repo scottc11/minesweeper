@@ -30,8 +30,8 @@
 
 .tile {
   display: inline-block;
-  border: solid;
-  border-width: 1px;
+  /* border: solid;
+  border-width: 1px; */
   width: 30px;
   height: 30px;
 }

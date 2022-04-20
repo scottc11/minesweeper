@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { webSocket } from '../../redux/sagas';
 
 interface TileProps {
     data: string;
@@ -9,7 +10,7 @@ interface TileProps {
 const Tile: FC<TileProps> = (props) => {
     let tileClass = props.data === "o" ? 'blank' : '';
     return (
-        <div onClick={() => console.log(props.x, props.y)} className={`tile ${tileClass}`}>
+        <div onClick={() => webSocket.send(`open ${props.x} ${props.y}`)} className={`tile ${tileClass}`}>
             {props.data}
         </div>
     )
