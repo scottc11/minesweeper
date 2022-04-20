@@ -4,8 +4,14 @@ import useWebSocket from 'react-use-websocket';
 import { Map } from './components';
 import Button from '@mui/material/Button';
 import generateMapArray from './utils/generateMap';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './redux/store';
+import { increment } from './redux/mapSlice';
 
 function App() {
+  
+  const { count } = useSelector((state: RootState) => state.map);
+  const dispatch = useDispatch();
 
   const mapData = generateMapArray(10, 20);
 
@@ -28,6 +34,7 @@ function App() {
         <Button onClick={() => sendMessage("map")}>Map</Button>
         <Button onClick={() => sendMessage("new 1")}>New Game</Button>
         <Button onClick={() => sendMessage("open 1 2")}>Open</Button>
+        <Button onClick={() => dispatch(increment())}>{count}</Button>
         <Map data={mapData} />
       </header>
     </div>
