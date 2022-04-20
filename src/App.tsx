@@ -8,6 +8,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { increment } from './redux/mapSlice';
 
+interface GameAction {
+  action: string;
+  data: Array<string>;
+}
+
+function parseMapData(data: string) {
+  let mapData = data.split(`\n`).slice(1);
+  mapData.pop();
+  console.log(mapData);
+  const rows = mapData.map( row => {
+    return row.split('');
+  });
+  return rows;
+}
+
 function App() {
   
   const { count } = useSelector((state: RootState) => state.map);
@@ -22,9 +37,26 @@ function App() {
       shouldReconnect: () => false,
     }
   );
-
+  
   useEffect(() => {
-    lastMessage && console.log(lastMessage.data);
+    if (lastMessage) {
+      const target: string = lastMessage.data.split(`:`)[0];
+      switch (target) {
+        case 'new':
+          console.log("New Game"); // trigger redux action
+          break;
+        case 'open':
+          console.log("Open");     // trigger redux action
+          break;
+        case 'map':
+          console.log("Map");      // trigger redux action
+          console.log(parseMapData(lastMessage.data));
+          break;
+        default:
+          console.log("Getting Help");
+          break;
+      }
+    }
   }, [lastMessage]);
 
   return (
