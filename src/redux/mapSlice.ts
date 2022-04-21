@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
 
-export const SET_NERVOUS = "SET_NERVOUS";
 export const GET_MAP = "GET_MAP";
 export const SET_MAP = "SET_MAP";
 export const INIT_WEB_SOCKET = "INIT_WEB_SOCKET";
@@ -8,10 +7,17 @@ export const INIT_WEB_SOCKET = "INIT_WEB_SOCKET";
 export const getMap = createAction(GET_MAP);
 export const initWebSocket = createAction(INIT_WEB_SOCKET);
 
+export enum GameAction {
+    NEW_GAME = 'new',
+    OPEN_TILE = 'open',
+    GET_MAP = 'map',
+    HELP = 'help'
+};
+
 export enum GameStatus {
-    OK,
-    NERVOUS,
-    GAME_OVER
+    OK = 'OK',
+    SELECTING = 'selecting',
+    GAME_OVER = 'You lose'
 }
 
 export interface MapState {

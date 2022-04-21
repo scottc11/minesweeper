@@ -20,7 +20,7 @@ const Tile: FC<TileProps> = (props) => {
                 <div
                     className='tile--unopened'
                     onClick={() => webSocket.send(`open ${props.x} ${props.y}`)}
-                    onMouseEnter={() => dispatch(setStatus(GameStatus.NERVOUS))}
+                    onMouseEnter={() => dispatch(setStatus(GameStatus.SELECTING))}
                     onMouseLeave={() => dispatch(setStatus(GameStatus.OK))}
                 >
                     {props.value}

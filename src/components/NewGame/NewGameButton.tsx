@@ -16,7 +16,7 @@ const NewGameButton: FC<NewGameButtonProps> = (props) => {
         case GameStatus.OK:
             icon = <SentimentSatisfiedAltIcon sx={{ fontSize: 60 }} />;
             break;
-        case GameStatus.NERVOUS:
+        case GameStatus.SELECTING:
             icon = <SentimentNeutralOutlined sx={{ fontSize: 60 }} />;
             break;
         case GameStatus.GAME_OVER:
