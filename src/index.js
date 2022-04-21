@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
+import { initWebSocket } from './redux/mapSlice';
+
+store.dispatch(initWebSocket());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
