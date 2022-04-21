@@ -27,9 +27,6 @@ const recieveMessage = (socket: WebSocket) => {
 }
 
 export const webSocket = new WebSocket("wss://hometask.eg1236.com/game1/");
-// webSocket.onopen = () => {
-//     console.log('opening...')
-// }
 
 function* webSocketListener(): any { // note: you could pass an "action" param here
     const channel = yield call(recieveMessage, webSocket);
@@ -61,7 +58,8 @@ function* webSocketListener(): any { // note: you could pass an "action" param h
     } catch (error) {
         console.log(error);
     } finally {
-        console.log("something terminated");
+        console.log("Terminated Socket Connection");
+        webSocket.close();
     }
 }
 
