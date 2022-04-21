@@ -7,6 +7,7 @@ export const INIT_WEB_SOCKET = "INIT_WEB_SOCKET";
 export const getMap = createAction(GET_MAP);
 export const initWebSocket = createAction(INIT_WEB_SOCKET);
 
+// these are the message types coming from websocket.
 export enum GameAction {
     NEW_GAME = 'new',
     OPEN_TILE = 'open',
@@ -40,12 +41,7 @@ export const mapSlice = createSlice({
         setStatus: (state, action: PayloadAction<GameStatus>) => {
             state.status = action.payload;
         }
-    },
-    // extraReducers: (builder) => {
-    //     builder.addCase(getMap, (state, action) => {
-    //         state.post = action.payload;
-    //     })
-    // }
+    }
 })
 
 // Action creators are generated for each case reducer function
