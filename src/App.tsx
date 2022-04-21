@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { initWebSocket } from './redux/mapSlice';
 import { webSocket } from './redux/sagas';
+import NewGameButton from './components/NewGame/NewGameButton';
 
 function App() {
   const [initialized, setInitialize] = useState(false);
-  const { data } = useSelector((state: RootState) => state.map);
+  const map = useSelector((state: RootState) => state.map);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,14 +27,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button onClick={() => webSocket.send("help")}>Help</Button>
-        <Button onClick={() => webSocket.send("map")}>Map</Button>
-        <Button onClick={() => webSocket.send("new 1")}>New Game</Button>
-        <Button onClick={() => webSocket.send("open 1 2")}>Open</Button>
-        <Map data={data} />
+        <NewGameButton status={map.status}/>
+        <Map data={map.data} />
       </header>
     </div>
   );
 }
 
 export default App;
+
+
+// on hover, change smiley emoji to nervous emoji

@@ -1,6 +1,10 @@
 import { call, put, take, takeLatest } from 'redux-saga/effects';
-import { INIT_WEB_SOCKET, load } from './mapSlice';
+import { GameStatus, INIT_WEB_SOCKET, load, setStatus } from './mapSlice';
 import { eventChannel, END } from 'redux-saga';
+
+function parseOpenData(data: string): string {
+    return data.split(': ')[1];
+}
 
 function parseMapData(data: string): Array<Array<string>> {
     let mapData = data.split(`\n`).slice(1);
@@ -36,12 +40,18 @@ function* webSocketListener(): any { // note: you could pass an "action" param h
             switch (target) {
                 case 'new':
                     console.log(socketMessage.data);
+                    yield put(setStatus(GameStatus.OK));
                     yield webSocket.send("map");
                     break;
                 case 'open':
                     console.log(socketMessage.data);
-                    // if "You Lose", dispatch END GAME action
-                    // else, send for map
+                    let action = parseOpenData(socketMessage.data);
+                    console.log(action);
+                    if (action === "OK") {
+                        yield put(setStatus(GameStatus.OK))
+                    } else if (action === "You lose") {
+                        yield put(setStatus(GameStatus.GAME_OVER))
+                    }
                     yield webSocket.send("map");
                     break;
                 case 'map':

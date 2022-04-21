@@ -36,10 +36,26 @@
   height: 30px;
 }
 
+.tile:hover {
+  cursor: pointer;
+}
+
+.tile--unopened:hover {
+  color: #61dafb;
+}
+
+.map {
+  margin: 20px;
+}
+
 .map--row {
   display: block;
   margin: 0;
   line-height: 0;
+}
+
+.new-game:hover {
+  cursor: pointer;
 }
 
 .blank {
