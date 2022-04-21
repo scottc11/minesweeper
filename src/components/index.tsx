@@ -1,4 +1,4 @@
 import Map from "./Map/Map"
-import Tile from "./Tile/Tile";
+import MapTile from "./MapTile/MapTile";
 
-export { Map, Tile };
+export { Map, MapTile };

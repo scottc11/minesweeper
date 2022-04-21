@@ -4,13 +4,13 @@ import { GameStatus, setStatus } from '../../redux/mapSlice';
 import { webSocket } from '../../redux/sagas';
 import { RootState } from '../../redux/store';
 
-interface TileProps {
+interface MapTileProps {
     value: string;
     x: number;
     y: number;
 }
 
-const Tile: FC<TileProps> = (props) => {
+const MapTile: FC<MapTileProps> = (props) => {
     const { status } = useSelector((state: RootState) => state.map);
     const dispatch = useDispatch();
 
@@ -31,7 +31,6 @@ const Tile: FC<TileProps> = (props) => {
         }
     }
 
-    let tileClass = props.value === "□" ? '' : '';
     return (
         <div className='tile'>
             {renderTile()}
@@ -39,4 +38,4 @@ const Tile: FC<TileProps> = (props) => {
     )
 }
 
-export default Tile;
+export default MapTile;

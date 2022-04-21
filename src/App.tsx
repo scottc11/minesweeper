@@ -1,13 +1,10 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Map } from './components';
-import Button from '@mui/material/Button';
-import generateMapArray from './utils/generateMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { initWebSocket } from './redux/mapSlice';
-import { webSocket } from './redux/sagas';
-import NewGameButton from './components/NewGame/NewGameButton';
+import NewGameButton from './components/NewGameButton/NewGameButton';
 
 function App() {
   const [initialized, setInitialize] = useState(false);
