@@ -1,8 +1,8 @@
 import './App.css';
-import { Map } from './components';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import NewGameButton from './components/NewGameButton/NewGameButton';
+import Map from './components/Map/Map';
 
 function App() {
   const map = useSelector((state: RootState) => state.map);
