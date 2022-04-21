@@ -54,7 +54,11 @@
   line-height: 0;
 }
 
-.new-game:hover {
+.new-game-btn {
+  color: white !important;
+}
+
+.new-game-btn:hover {
   cursor: pointer;
 }
 

@@ -3,6 +3,7 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import { webSocket } from '../../redux/sagas';
 import { SentimentNeutralOutlined, SentimentVeryDissatisfiedOutlined } from '@mui/icons-material';
 import { GameStatus } from '../../redux/mapSlice';
+import { Button, Fade, Tooltip } from '@mui/material';
 
 interface NewGameButtonProps {
     status: GameStatus;
@@ -13,20 +14,24 @@ const NewGameButton: FC<NewGameButtonProps> = (props) => {
     let icon;
     switch (props.status) {
         case GameStatus.OK:
-            icon = <SentimentSatisfiedAltIcon fontSize="large" />;
+            icon = <SentimentSatisfiedAltIcon sx={{ fontSize: 60 }} />;
             break;
         case GameStatus.NERVOUS:
-            icon = <SentimentNeutralOutlined fontSize="large" />;
+            icon = <SentimentNeutralOutlined sx={{ fontSize: 60 }} />;
             break;
         case GameStatus.GAME_OVER:
-            icon = <SentimentVeryDissatisfiedOutlined fontSize="large" />
+            icon = <SentimentVeryDissatisfiedOutlined sx={{ fontSize: 60 }} />
             break;
     }
 
     return (
-        <div onClick={() => webSocket.send(`new 1`)}>
-            {icon}
-        </div>
+        <Tooltip title="New Game" placement="top" arrow TransitionComponent={Fade} TransitionProps={{ timeout: 1000 }}>
+            <div onClick={() => webSocket.send(`new 1`)}>
+                <Button color="primary">
+                    <span className='new-game-btn'>{icon}</span>
+                </Button>
+            </div>
+        </Tooltip>
     )
 }
 
