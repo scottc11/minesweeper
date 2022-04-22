@@ -18,7 +18,8 @@ export enum GameAction {
 export enum GameStatus {
     OK = 'OK',
     SELECTING = 'selecting',
-    GAME_OVER = 'You lose'
+    GAME_OVER = 'You lose',
+    YOU_WIN = 'open: You win. The password for this level is: ThisWasEasy'
 }
 
 export interface MapState {
