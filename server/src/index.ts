@@ -1,23 +1,8 @@
-const readline = require('node:readline');
-/*
-'M' represents an unrevealed mine,
-'E' represents an unrevealed empty square,
-'B' represents a revealed blank square that has no adjacent mines (i.e., above, below, left, right, and all 4 diagonals),
-digit ('1' to '8') represents how many mines are adjacent to this revealed square, and
-'X' represents a revealed mine.
-*/
+import { TileType, TileTypes } from "../../common/types";
+import express from "express";
+import readline from "node:readline"
 
 console.log("Hellooo Minesweeper ⛏");
-
-interface TileType {
-    row: number;
-    col: number;
-}
-
-enum TileTypes {
-    MINE = "*",
-    UNREVEALED = "□"
-}
 
 type BoardType = Array<Array<TileTypes>>;
 
@@ -27,7 +12,7 @@ class Game {
     numMines: number;
     board: BoardType;           // state of the board
     boardMask: BoardType;       // what the user sees (ie. state)
-    mines: Array<TileType>; // stores (x,y) coordinates of all mines.
+    mines: Array<TileType>;     // stores (x,y) coordinates of all mines.
 
     constructor(rows: number, columns: number, numMines: number) {
         this.rows = rows;
@@ -83,7 +68,8 @@ class Game {
             [1, -1], // S.W
             [0, -1], // West
             [-1, -1] // N.W
-        ]
+        ];
+
         let counter: number = 0;
         for (let i = 0; i < positions.length; i++) {
             let ghostTile = { row: tile.row + positions[i][0], col: tile.col + positions[i][1] };
@@ -118,9 +104,4 @@ rl.question("Enter Coordinate: (ex. 'row col')", function (position: string) {
     let row: number = Number(coords[0]);
     let col: number = Number(coords[1]);
     console.log(game.countNeighboringMines({ row, col }));
-});
-
-rl.on("close", function () {
-    console.log("\nBYE BYE !!!");
-    process.exit(0);
 });
