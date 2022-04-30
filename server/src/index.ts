@@ -1,6 +1,6 @@
 import { TileType, TileTypes } from "../../common/types";
 import express from "express";
-import readline from "node:readline"
+import { ServerPort } from "../../common/conf";
 
 console.log("Hellooo Minesweeper ⛏");
 
@@ -97,11 +97,12 @@ const game: Game = new Game(10, 10, 25);
 game.reset();
 console.table(game.board);
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const app = express();
 
-rl.question("Enter Coordinate: (ex. 'row col')", function (position: string) {
-    let coords = position.split(" ");
-    let row: number = Number(coords[0]);
-    let col: number = Number(coords[1]);
-    console.log(game.countNeighboringMines({ row, col }));
-});
+app.get('/', (req, res) => {
+    res.send('Hello World!!!')
+})
+
+app.listen(ServerPort, () => {
+    console.log(`Example app listening on port ${ServerPort}`)
+})
