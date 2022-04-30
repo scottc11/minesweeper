@@ -26,16 +26,18 @@ class Game {
     rows: number;
     columns: number;
     numMines: number;
-    board: BoardType;
+    board: BoardType;           // state of the board
+    mines: Array<TilePosition>; // stores (x,y) coordinates of all mines.
 
     constructor(rows: number, columns: number, numMines: number) {
         this.rows = rows;
         this.columns = columns;
         this.numMines = numMines;
         this.board = new Array();
+        this.mines = new Array(this.numMines);
     }
 
-    initialize() {
+    reset() {
         // init board empty
         for (let row = 0; row < this.rows; row++) {
             this.board[row] = [];
@@ -56,15 +58,14 @@ class Game {
     }
 
     placeMines() {
-        let mines: Array<TilePosition> = new Array(this.numMines);
-        for (let i = 0; i < mines.length; i++) {
-            mines[i] = this.randomlyPlaceMine();
-            this.board[mines[i][0]][mines[i][1]] = TileTypes.MINE;
+        for (let i = 0; i < this.mines.length; i++) {
+            this.mines[i] = this.randomlyPlaceMine();
+            this.board[this.mines[i][0]][this.mines[i][1]] = TileTypes.MINE;
         }
     }
 }
 
 const game: Game = new Game(10, 10, 25);
 
-game.initialize();
+game.reset();
 console.table(game.board);
