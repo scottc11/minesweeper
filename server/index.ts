@@ -1,12 +1,14 @@
 import { TileType, TileTypes } from "../common/types";
 import express from "express";
 import { ServerPort } from "../common/conf";
+import { connectDB } from "./database";
 
 console.log("Hellooo Minesweeper ⛏");
 
 type BoardType = Array<Array<TileTypes>>;
 
 class Game {
+    started: boolean;
     rows: number;
     columns: number;
     numMines: number;
@@ -15,6 +17,7 @@ class Game {
     mines: Array<TileType>;     // stores (x,y) coordinates of all mines.
 
     constructor(rows: number, columns: number, numMines: number) {
+        this.started = false;
         this.rows = rows;
         this.columns = columns;
         this.numMines = numMines;
@@ -99,15 +102,22 @@ console.table(game.board);
 
 const app = express();
 
+// connect database
+connectDB();
+
 app.get('/', (req, res) => {
     res.send('Hello World!!!')
 })
 
+app.get('/map', (req, res) => {
+    res.json(game.board);
+})
+
 app.get('/open/:row-:col', (req, res) => {
     const { row, col } = req.params;
-    res.send(`row: ${row} column: ${col}`);
+    res.json(`row: ${row} column: ${col}`);
 })
 
 app.listen(ServerPort, () => {
-    console.log(`Example app listening on port ${ServerPort}`)
+    console.log(`Example app listening on port ${ServerPort} 👌`);
 })
