@@ -7,3 +7,5 @@ export enum TileTypes {
     MINE = "*",
     UNREVEALED = "□"
 }
+
+export type BoardType = Array<Array<TileTypes>>;
