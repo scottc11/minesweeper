@@ -9,3 +9,7 @@ export enum TileTypes {
 }
 
 export type BoardType = Array<Array<TileTypes>>;
+
+export interface GameClientType {
+    map: BoardType
+}

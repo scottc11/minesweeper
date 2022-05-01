@@ -1,4 +1,4 @@
-import { BoardType, TileType, TileTypes } from "../../common/types";
+import { BoardType, GameClientType, TileType, TileTypes } from "../../common/types";
 
 export class Game {
     started: boolean;
@@ -85,5 +85,9 @@ export class Game {
     // check if given tile is a mine
     tileIsMine(tile: TileType): boolean {
         return this.board[tile.row][tile.col] === TileTypes.MINE ? true : false;
+    }
+
+    getClientAttributes(): GameClientType {
+        return { map: this.board }
     }
 }
