@@ -1,6 +1,6 @@
-import { TileType, TileTypes } from "../../common/types";
+import { TileType, TileTypes } from "../common/types";
 import express from "express";
-import { ServerPort } from "../../common/conf";
+import { ServerPort } from "../common/conf";
 
 console.log("Hellooo Minesweeper ⛏");
 
@@ -101,6 +101,11 @@ const app = express();
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!')
+})
+
+app.get('/open/:row-:col', (req, res) => {
+    const { row, col } = req.params;
+    res.send(`row: ${row} column: ${col}`);
 })
 
 app.listen(ServerPort, () => {
