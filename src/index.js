@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { store } from './redux/store';
 import { Provider } from 'react-redux';
+import './client/index.css';
+import App from './client/App';
+import reportWebVitals from './client/reportWebVitals';
+import { store } from './client/redux/store';
 
 // store.dispatch(); // new game
 

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import { SentimentNeutralOutlined, SentimentVeryDissatisfiedOutlined } from '@mui/icons-material';
 import { Button, Fade, Tooltip } from '@mui/material';
-import { GameStatus } from '../../common/types'
+import { GameStatus } from '../../../common/types';
 
 interface NewGameButtonProps {
     status: GameStatus;

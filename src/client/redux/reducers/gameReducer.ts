@@ -1,4 +1,4 @@
-import { GameClientType, GameStatus } from '../../common/types';
+import { GameClientType, GameStatus } from '../../../common/types';
 import { NEW_GAME } from '../actions';
 
 const initialState: GameClientType = {
