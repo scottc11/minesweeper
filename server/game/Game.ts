@@ -1,4 +1,4 @@
-import { BoardType, GameClientType, TileType, TileTypes } from "../../common/types";
+import { BoardType, GameClientType, TilePosition, TileValue } from "../../common/types";
 
 export class Game {
     started: boolean;
@@ -7,7 +7,7 @@ export class Game {
     numMines: number;
     board: BoardType;           // state of the board
     boardMask: BoardType;       // what the user sees (ie. state)
-    mines: Array<TileType>;     // stores (x,y) coordinates of all mines.
+    mines: Array<TilePosition>;     // stores (x,y) coordinates of all mines.
 
     constructor(rows: number, columns: number, numMines: number) {
         this.started = false;
@@ -24,13 +24,13 @@ export class Game {
         for (let row = 0; row < this.rows; row++) {
             this.board[row] = [];
             for (let col = 0; col < this.columns; col++) {
-                this.board[row][col] = TileTypes.UNREVEALED;
+                this.board[row][col] = TileValue.UNREVEALED;
             }
         }
         this.placeMines();
     }
 
-    randomlyPlaceMine(): TileType {
+    randomlyPlaceMine(): TilePosition {
 
         let random = Math.random() * ((this.rows * this.columns) - 1);
         random = Math.round(random);
@@ -42,12 +42,29 @@ export class Game {
     placeMines() {
         for (let i = 0; i < this.mines.length; i++) {
             this.mines[i] = this.randomlyPlaceMine();
-            this.board[this.mines[i].row][this.mines[i].col] = TileTypes.MINE;
+            this.board[this.mines[i].row][this.mines[i].col] = TileValue.MINE;
         }
     }
 
+    reveal(tile: TilePosition) {
+        if (this.tileIsMine(tile)) {
+            // reveal all mines on map
+            // set game status to "LOSE"
+            console.log('is mine')
+        } else {
+            // check if tile is blank (ie. no neighboring mines), if it is, then recursively reveal stuff
+            const neighboringMines = this.countNeighboringMines(tile);
+            this.updateMap(tile, neighboringMines);
+        }
+    }
+
+    updateMap(tile: TilePosition, value: TileValue | number ) {
+        this.board[tile.row][tile.col] = String(value);
+        console.table(this.board);
+    }
+
     // count all the mines surrounding the given tile position
-    countNeighboringMines(tile: TileType): number {
+    countNeighboringMines(tile: TilePosition): number {
         /*
             N.W  N   N.E
               \  |  /
@@ -78,13 +95,13 @@ export class Game {
         return counter;
     }
 
-    tileExists(tile: TileType): boolean {
+    tileExists(tile: TilePosition): boolean {
         return (tile.row >= 0) && (tile.row < this.rows) && (tile.col >= 0) && (tile.col < this.columns);
     }
 
     // check if given tile is a mine
-    tileIsMine(tile: TileType): boolean {
-        return this.board[tile.row][tile.col] === TileTypes.MINE ? true : false;
+    tileIsMine(tile: TilePosition): boolean {
+        return this.board[tile.row][tile.col] === TileValue.MINE ? true : false;
     }
 
     getClientAttributes(): GameClientType {

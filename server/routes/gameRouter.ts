@@ -1,5 +1,6 @@
 import express from 'express';
 import { nextTick } from 'process';
+import { TilePosition } from '../../common/types';
 import { Game } from '../game/Game';
 declare module 'express-session' {
     export interface SessionData {
@@ -19,25 +20,21 @@ gameRouter.get('/', (req, res, next) => {
     next();
 })
 
-gameRouter.get('/map', (req, res) => {
-    if (req.session.game) {
-        res.json(req.session.game.board);
-    } else {
-        res.status(404).json('first create a new game');
-    }
-})
-
 gameRouter.post('/new', (req, res, next) => {
     if (!req.session.game) {
         req.session.game = new Game(10, 10, 25);
         req.session.game.reset();
-        next();
     }
+    next();
 })
 
-gameRouter.post('/reveal/:row-:col', (req, res) => {
+gameRouter.post('/reveal/:row-:col', (req, res, next) => {
     const { row, col } = req.params;
-    res.json(`row: ${row} column: ${col}`);
+    const tile: TilePosition = { row: Number(row), col: Number(col) };
+    if (req.session.game) {
+        req.session.game.reveal(tile);
+    }
+    next();
 })
 
 gameRouter.use((req, res, next) => {
