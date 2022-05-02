@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { ServerURL } from '../../common/conf';
+import { ServerURL } from '../common/conf';
 import { NEW_GAME } from './actions';
 import axios from 'axios';
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { GameStatus } from '../../../common/types'
+import { GameStatus } from '../../common/types'
 
 interface MapTileProps {
     value: string;

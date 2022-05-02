@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
-store.dispatch(); // new game
+// store.dispatch(); // new game
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

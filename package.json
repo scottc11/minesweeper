@@ -38,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ts-watch-server": "ts-node-dev --respawn server/index.ts"
+    "ts-watch-server": "ts-node-dev --respawn src/server/index.ts"
   },
   "eslintConfig": {
     "extends": [
