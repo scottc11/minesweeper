@@ -8,8 +8,16 @@ export enum TileValue {
     UNREVEALED = "□"
 }
 
-export type BoardType = Array<Array<string>>;
+export type MapData = Array<Array<string>>;
+
+export enum GameStatus {
+    OK,
+    SELECTING,
+    GAME_OVER,
+    YOU_WIN
+}
 
 export interface GameClientType {
-    map: BoardType
+    map: MapData,
+    status: GameStatus
 }

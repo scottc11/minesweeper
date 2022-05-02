@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GameStatus, setStatus } from '../../redux/mapSlice';
-import { webSocket } from '../../redux/sagas';
 import { RootState } from '../../redux/store';
+import { GameStatus } from '../../../common/types'
 
 interface MapTileProps {
     value: string;
@@ -11,7 +10,7 @@ interface MapTileProps {
 }
 
 const MapTile: FC<MapTileProps> = (props) => {
-    const { status } = useSelector((state: RootState) => state.map);
+    const { status } = useSelector((state: RootState) => state.game);
     const dispatch = useDispatch();
 
     const renderTile = () => {
@@ -19,9 +18,9 @@ const MapTile: FC<MapTileProps> = (props) => {
             return (
                 <div
                     className='tile--unopened'
-                    onClick={() => webSocket.send(`open ${props.x} ${props.y}`)}
-                    onMouseEnter={() => dispatch(setStatus(GameStatus.SELECTING))}
-                    onMouseLeave={() => dispatch(setStatus(GameStatus.OK))}
+                    onClick={() => console.log(`open ${props.x} ${props.y}`)}
+                    // onMouseEnter={() => dispatch(setStatus(GameStatus.SELECTING))}
+                    // onMouseLeave={() => dispatch(setStatus(GameStatus.OK))}
                 >
                     {props.value}
                 </div>

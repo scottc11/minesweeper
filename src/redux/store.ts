@@ -1,22 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from '@redux-saga/core'
 import { createLogger } from 'redux-logger';
-import mapReducer from './mapSlice'
-import { watcherSaga } from './sagas';
+import rootReducer from './reducers';
+import { gameSaga } from './sagas';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
-const middleware = [sagaMiddleware, logger];
+const middleware = applyMiddleware(sagaMiddleware, logger);
 
-export const store = configureStore({
-    reducer: {
-        map: mapReducer
-    },
-    middleware: middleware
-})
+export const store = createStore(
+    rootReducer,
+    middleware
+)
 
-sagaMiddleware.run(watcherSaga);
+sagaMiddleware.run(gameSaga);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

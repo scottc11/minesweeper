@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import { webSocket } from '../../redux/sagas';
 import { SentimentNeutralOutlined, SentimentVeryDissatisfiedOutlined } from '@mui/icons-material';
-import { GameStatus } from '../../redux/mapSlice';
 import { Button, Fade, Tooltip } from '@mui/material';
+import { GameStatus } from '../../../common/types'
 
 interface NewGameButtonProps {
     status: GameStatus;
@@ -26,7 +25,7 @@ const NewGameButton: FC<NewGameButtonProps> = (props) => {
 
     return (
         <Tooltip title="New Game" placement="top" arrow TransitionComponent={Fade} TransitionProps={{ timeout: 1000 }}>
-            <div onClick={() => webSocket.send(`new 1`)}>
+            <div onClick={() => console.log('new game action')}>
                 <Button color="primary">
                     <span className='new-game-btn'>{icon}</span>
                 </Button>

@@ -1,16 +1,16 @@
-import { BoardType, GameClientType, TilePosition, TileValue } from "../../common/types";
+import { MapData, GameClientType, TilePosition, TileValue, GameStatus } from "../../common/types";
 
 export class Game {
-    started: boolean;
+    status: GameStatus;
     rows: number;
     columns: number;
     numMines: number;
-    board: BoardType;           // state of the board
-    boardMask: BoardType;       // what the user sees (ie. state)
+    board: MapData;           // state of the board
+    boardMask: MapData;       // what the user sees (ie. state)
     mines: Array<TilePosition>;     // stores (x,y) coordinates of all mines.
 
     constructor(rows: number, columns: number, numMines: number) {
-        this.started = false;
+        this.status = GameStatus.OK;
         this.rows = rows;
         this.columns = columns;
         this.numMines = numMines;
@@ -105,6 +105,6 @@ export class Game {
     }
 
     getClientAttributes(): GameClientType {
-        return { map: this.board }
+        return { map: this.board, status: this.status }
     }
 }
