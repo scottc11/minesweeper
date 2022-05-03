@@ -1,16 +1,26 @@
-import { takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { ServerURL } from '../../common/conf';
 import { NEW_GAME } from './actions';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { loadGameData } from './actions/gameActions';
 
-export const newGame = () => {
+function requestGame() {
+    return axios.request({
+        method: 'post',
+        url: `${ServerURL}api/games/new`
+    })
+}
+
+
+function* handleNewGame() {
     try {
-        axios.post(ServerURL + `api/game/new`);       
+        const response: AxiosResponse = yield call(requestGame);
+        yield put(loadGameData(response.data));
     } catch (error) {
-        
+        console.error(error);
     }
 }
 
 export function* gameSaga() {
-    yield takeLatest(NEW_GAME, newGame);
+    yield takeLatest(NEW_GAME, handleNewGame);
 }

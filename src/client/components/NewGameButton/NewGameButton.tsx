@@ -3,12 +3,16 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import { SentimentNeutralOutlined, SentimentVeryDissatisfiedOutlined } from '@mui/icons-material';
 import { Button, Fade, Tooltip } from '@mui/material';
 import { GameStatus } from '../../../common/types';
+import { useDispatch } from 'react-redux';
+import { newGame } from '../../redux/actions/gameActions';
 
 interface NewGameButtonProps {
     status: GameStatus;
 }
 
 const NewGameButton: FC<NewGameButtonProps> = (props) => {
+
+    const dispatch = useDispatch();
 
     let icon;
     switch (props.status) {
@@ -25,7 +29,7 @@ const NewGameButton: FC<NewGameButtonProps> = (props) => {
 
     return (
         <Tooltip title="New Game" placement="top" arrow TransitionComponent={Fade} TransitionProps={{ timeout: 1000 }}>
-            <div onClick={() => console.log('new game action')}>
+            <div onClick={() => dispatch(newGame())}>
                 <Button color="primary">
                     <span className='new-game-btn'>{icon}</span>
                 </Button>
