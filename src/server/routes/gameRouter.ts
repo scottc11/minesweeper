@@ -2,11 +2,14 @@ import express from 'express';
 import { nextTick } from 'process';
 import { TilePosition } from '../../common/types';
 import { Game } from '../game/Game';
+import { GAMES } from '../server';
 declare module 'express-session' {
     export interface SessionData {
         game: Game;
     }
 }
+
+let GAME: Game;
 
 const gameRouter = express.Router();
 
@@ -21,28 +24,23 @@ gameRouter.get('/', (req, res, next) => {
 })
 
 gameRouter.post('/new', (req, res, next) => {
-    if (!req.session.game) {
-        req.session.game = new Game(10, 10, 25);
-        req.session.game.reset();
-    }
+    // if (!GAMES.map(game=>game.id).includes(req.session.id)) {
+    //     GAMES.push(new Game(10, 10, 25, req.session.id));
+    // }
+    GAME = new Game(10, 10, 25, req.session.id);
+    GAME.reset();
     next();
 })
 
 gameRouter.post('/reveal/:row-:col', (req, res, next) => {
     const { row, col } = req.params;
     const tile: TilePosition = { row: Number(row), col: Number(col) };
-    if (req.session.game) {
-        req.session.game.reveal(tile);
-    }
+    GAME.reveal(tile);
     next();
 })
 
 gameRouter.use((req, res, next) => {
-    if (req.session.game) {
-        res.json(req.session.game.getClientAttributes());
-    } else {
-        res.status(404).json('Must create a new game first.');
-    }
+    res.json(GAME.getClientAttributes());
 })
 
 export default gameRouter;

@@ -5,8 +5,14 @@ import './client/index.css';
 import App from './client/App';
 import reportWebVitals from './client/reportWebVitals';
 import { store } from './client/redux/store';
+import axios from 'axios';
+import { ServerURL } from './common/conf';
 
 // store.dispatch(); // new game
+
+axios.defaults.baseURL = `${ServerURL}`;
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'connect.sid'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

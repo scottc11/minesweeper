@@ -3,6 +3,8 @@ import { ServerPort } from "../common/conf";
 import { connectDB } from "./database";
 import gameRouter from "./routes/gameRouter";
 import session from "express-session";
+import cors from 'cors';
+import { Game } from "./game/Game";
 
 // create express application
 const app = express();
@@ -10,9 +12,19 @@ const app = express();
 // connect database
 connectDB();
 
+export const GAMES: Array<Game> = [];
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}))
+
 app.use(session({
     secret: 'some secret',
     cookie: {
+        secure: false, // set true when using https
+        domain: 'http://localhost:3000',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
     },
     saveUninitialized: true,
@@ -20,7 +32,9 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    console.log(req.headers.cookie);
+    console.log(req.session.id);
+    console.log(req.sessionID);
     next();
 })
 

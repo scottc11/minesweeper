@@ -1,6 +1,8 @@
 import { MapData, GameClientType, TilePosition, TileValue, GameStatus } from "../../common/types";
 
 export class Game {
+    static numInstances: number = 0;
+    id: string;
     status: GameStatus;
     rows: number;
     columns: number;
@@ -9,7 +11,7 @@ export class Game {
     boardMask: MapData;       // what the user sees (ie. state)
     mines: Array<TilePosition>;     // stores (x,y) coordinates of all mines.
 
-    constructor(rows: number, columns: number, numMines: number) {
+    constructor(rows: number, columns: number, numMines: number, id: string) {
         this.status = GameStatus.OK;
         this.rows = rows;
         this.columns = columns;
@@ -17,6 +19,8 @@ export class Game {
         this.board = new Array();
         this.boardMask = new Array();
         this.mines = new Array(this.numMines);
+        this.id = id;
+        Game.numInstances++;
     }
 
     reset() {
