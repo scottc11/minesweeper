@@ -51,24 +51,26 @@ export class Game {
     }
 
     reveal(tile: TilePosition) {
+        // add a check here to see if the tile has already been 'marked', if it has, exit?
         if (this.tileIsMine(tile)) {
             // reveal all mines on map
             // set game status to "LOSE"
             console.log('is mine')
         } else {
-            // check if tile is blank (ie. no neighboring mines), if it is, then recursively reveal stuff
-            const neighboringMines = this.countNeighboringMines(tile);
-            this.updateMap(tile, neighboringMines);
+            this.countNeighboringMines(tile);
+            console.table(this.board);
         }
     }
 
     updateMap(tile: TilePosition, value: TileValue | number ) {
         this.board[tile.row][tile.col] = String(value);
-        console.table(this.board);
     }
 
     // count all the mines surrounding the given tile position
-    countNeighboringMines(tile: TilePosition): number {
+    countNeighboringMines(tile: TilePosition) {
+        if (this.tileIsMine(tile) || !this.tileExists(tile) || !this.tileHidden(tile)) {
+            return;
+        }
         /*
             N.W  N   N.E
               \  |  /
@@ -87,16 +89,28 @@ export class Game {
             [-1, -1] // N.W
         ];
 
-        let counter: number = 0;
-        for (let i = 0; i < positions.length; i++) {
-            let ghostTile = { row: tile.row + positions[i][0], col: tile.col + positions[i][1] };
-            if (this.tileExists(ghostTile)) {
-                if (this.tileIsMine(ghostTile)) {
-                    counter++;
-                }
+        // create an array containing all the tile positions adjecent to target tile
+        const neighboringTiles: Array<TilePosition> = positions.map( pos => ({ row: tile.row + pos[0], col: tile.col + pos[1] })).filter( t => this.tileExists(t));
+
+        let neighboringMines: number = 0;
+        neighboringTiles.forEach( t => { // count the amount of neighboring mines
+            if (this.tileIsMine(t)) {
+                neighboringMines++;
             }
+        })
+
+        if (neighboringMines === 0) { // tile is blank (ie. no neighboring mines), recursively reveal other cells
+            this.updateMap(tile, 0);
+            neighboringTiles.forEach( t => {
+                this.countNeighboringMines(t);
+            })
+        } else {
+            this.updateMap(tile, neighboringMines);
         }
-        return counter;
+    }
+
+    tileHidden(tile: TilePosition): boolean {
+        return this.board[tile.row][tile.col] == TileValue.UNREVEALED;
     }
 
     tileExists(tile: TilePosition): boolean {
