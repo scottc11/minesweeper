@@ -15,7 +15,7 @@ const gameRouter = express.Router();
 
 // invoked for any requests passed to this router. Apply middleware here
 gameRouter.use((req, res, next) => {
-    console.log('%s %s %s', req.method, req.url, req.path)
+    // console.log('%s %s %s', req.method, req.url, req.path)
     next();
 })
 

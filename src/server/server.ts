@@ -5,6 +5,7 @@ import gameRouter from "./routes/gameRouter";
 import session from "express-session";
 import cors from 'cors';
 import { Game } from "./game/Game";
+import clc from "cli-color";
 
 // create express application
 const app = express();
@@ -32,6 +33,8 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
+    const timestamp = new Date().toLocaleTimeString();
+    console.log(`${clc.blueBright(timestamp)} ${req.method} ${req.url} ${req.path}`)
     console.log(req.headers.cookie);
     console.log(req.session.id);
     console.log(req.sessionID);
