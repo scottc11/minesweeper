@@ -31,11 +31,10 @@ export class Game {
                 this.board[row][col] = TileValue.UNREVEALED;
             }
         }
-        this.placeMines();
+        this.createMineLocations();
     }
 
     randomlyPlaceMine(): TilePosition {
-
         let random = Math.random() * ((this.rows * this.columns) - 1);
         random = Math.round(random);
         let x: number = Math.floor(random / this.rows);
@@ -43,22 +42,23 @@ export class Game {
         return { row: x, col: y };
     }
 
-    placeMines() {
-        for (let i = 0; i < this.mines.length; i++) {
-            this.mines[i] = this.randomlyPlaceMine();
-            this.board[this.mines[i].row][this.mines[i].col] = TileValue.MINE;
+    createMineLocations() {
+        for (let index = 0; index < this.mines.length; index++) {
+            this.mines[index] = this.randomlyPlaceMine();
         }
     }
 
+    // reveal all mines on map
+    revealMines() {
+        this.mines.forEach( mine => this.board[mine.row][mine.col] = TileValue.MINE);
+    }
+
     reveal(tile: TilePosition) {
-        // add a check here to see if the tile has already been 'marked', if it has, exit?
         if (this.tileIsMine(tile)) {
-            // reveal all mines on map
-            // set game status to "LOSE"
-            console.log('is mine')
+            this.revealMines();
+            this.status = GameStatus.GAME_OVER;
         } else {
             this.countNeighboringMines(tile);
-            console.table(this.board);
         }
     }
 
@@ -119,7 +119,7 @@ export class Game {
 
     // check if given tile is a mine
     tileIsMine(tile: TilePosition): boolean {
-        return this.board[tile.row][tile.col] === TileValue.MINE ? true : false;
+        return this.mines.findIndex(t => t.row == tile.row && t.col == tile.col) != -1;
     }
 
     getClientAttributes(): GameClientType {
