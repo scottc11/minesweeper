@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { GameStatus, TileValue } from '../../../common/types';
@@ -12,6 +12,8 @@ interface MapTileProps {
 }
 
 const MapTile: FC<MapTileProps> = (props) => {
+    const [clickDisabled, disableClick] = useState(true);
+    const [isThinking, setThinking] = useState(false);
     const { status } = useSelector((state: RootState) => state.game);
     const dispatch = useDispatch();
     const position = createTilePosition(props.row, props.col);
@@ -28,11 +30,35 @@ const MapTile: FC<MapTileProps> = (props) => {
         }
     }
 
-    const handleClick = () => {
-        if (props.value == TileValue.UNREVEALED && status != GameStatus.GAME_OVER) {
-            dispatch(revealTile(position));
+    const handleMouseDown = () => {
+        if (props.value === TileValue.UNREVEALED && status !== GameStatus.GAME_OVER) {
+            disableClick(false);
+            setThinking(true);
         }
     }
+
+    const handleMouseUp = () => {
+        // check if mouse is still hovering over element
+        if (!clickDisabled) {
+            if (props.value === TileValue.UNREVEALED && status !== GameStatus.GAME_OVER) {
+                dispatch(revealTile(position));
+            }   
+        }
+        // note: techinically should call setThinking(false), but this causes a re-render which gives an odd flicker
+    }
+
+    const handleMouseEnter = () => {
+        // disableClick(false)
+    }
+
+    const handleMouseLeave = () => {
+        disableClick(true)
+        setThinking(false);
+    }
+
+    useEffect( () => {
+
+    })
 
     const getClassNames = () => {
         if (props.value !== TileValue.UNREVEALED) {
@@ -43,7 +69,13 @@ const MapTile: FC<MapTileProps> = (props) => {
     }
 
     return (
-        <div className={`tile ${getClassNames()}`} onClick={handleClick}>
+        <div
+            className={`tile ${getClassNames()} ${isThinking ? 'tile--opened' : ''}`}
+            onMouseUp={handleMouseUp}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseEnter={handleMouseEnter}
+        >
             {renderTile()}
         </div>
     )
