@@ -17,22 +17,20 @@ const MapTile: FC<MapTileProps> = (props) => {
     const position = createTilePosition(props.row, props.col);
 
     const renderTile = () => {
-        if (props.value === TileValue.UNREVEALED && status !== GameStatus.GAME_OVER) {
-            return (
-                <div
-                    className='tile--content tile--unopened'
-                    onClick={() => dispatch(revealTile(position)) }
-                    // onMouseEnter={() => dispatch(setStatus(GameStatus.SELECTING))}
-                    // onMouseLeave={() => dispatch(setStatus(GameStatus.OK))}
-                >
-                </div>
-            )
+        if (props.value === TileValue.UNREVEALED) {
+            return undefined;
         } else if (props.value === "0") {
-            return <div className='tile--content'>{props.value}</div>;
+            return undefined;
         } else if (props.value === TileValue.MINE) {
-            return <div>{"💣"}</div>
+            return "💣"
         } else {
-            return <div className='tile--content'>{props.value}</div>;
+            return props.value;
+        }
+    }
+
+    const handleClick = () => {
+        if (props.value == TileValue.UNREVEALED && status != GameStatus.GAME_OVER) {
+            dispatch(revealTile(position));
         }
     }
 
@@ -40,12 +38,12 @@ const MapTile: FC<MapTileProps> = (props) => {
         if (props.value !== TileValue.UNREVEALED) {
             return 'tile--opened';
         } else {
-            return '';
+            return 'tile--unopened';
         }
     }
 
     return (
-        <div className={`tile ${getClassNames()}`}>
+        <div className={`tile ${getClassNames()}`} onClick={handleClick}>
             {renderTile()}
         </div>
     )
