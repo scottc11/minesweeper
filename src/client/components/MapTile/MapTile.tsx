@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { GameStatus } from '../../../common/types';
+import { GameStatus, TileValue } from '../../../common/types';
 import { revealTile } from '../../redux/actions/gameActions';
 import { createTilePosition } from '../../../common/utils';
 
@@ -17,24 +17,35 @@ const MapTile: FC<MapTileProps> = (props) => {
     const position = createTilePosition(props.row, props.col);
 
     const renderTile = () => {
-        if (props.value === "□" && status !== GameStatus.GAME_OVER) {
+        if (props.value === TileValue.UNREVEALED && status !== GameStatus.GAME_OVER) {
             return (
                 <div
-                    className='tile--unopened'
+                    className='tile--content tile--unopened'
                     onClick={() => dispatch(revealTile(position)) }
                     // onMouseEnter={() => dispatch(setStatus(GameStatus.SELECTING))}
                     // onMouseLeave={() => dispatch(setStatus(GameStatus.OK))}
                 >
-                    {props.value}
                 </div>
             )
+        } else if (props.value === "0") {
+            return <div className='tile--content'>{props.value}</div>;
+        } else if (props.value === TileValue.MINE) {
+            return <div>{"💣"}</div>
         } else {
-            return <div>{props.value}</div>;
+            return <div className='tile--content'>{props.value}</div>;
+        }
+    }
+
+    const getClassNames = () => {
+        if (props.value !== TileValue.UNREVEALED) {
+            return 'tile--opened';
+        } else {
+            return '';
         }
     }
 
     return (
-        <div className='tile'>
+        <div className={`tile ${getClassNames()}`}>
             {renderTile()}
         </div>
     )
