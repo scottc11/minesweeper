@@ -1,8 +1,8 @@
 import axios from "axios";
 import { AnyAction } from "redux";
-import { LOAD_GAME_DATA, NEW_GAME, REVEAL_TILE } from ".";
+import { LOAD_GAME_DATA, NEW_GAME, REVEAL_TILE, SET_GAME_BUTTON_STATUS } from ".";
 import { ServerURL } from "../../../common/conf";
-import { GameClientType, TilePosition } from "../../../common/types";
+import { GameClientType, GameStatus, TilePosition } from "../../../common/types";
 import { AppDispatch, RootState } from "../store";
 
 export function newGame() {
@@ -27,5 +27,12 @@ function postDataToServer(url: string): any {
     return async (dispatch: AppDispatch) => {
         const response = await axios.post(url);
         dispatch({ type: LOAD_GAME_DATA, payload: response.data });
+    }
+}
+
+export function setGameButtonStatus(status: GameStatus) {
+    return {
+        type: SET_GAME_BUTTON_STATUS,
+        payload: status
     }
 }

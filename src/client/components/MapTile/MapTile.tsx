@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { GameStatus, TileValue } from '../../../common/types';
-import { revealTile } from '../../redux/actions/gameActions';
+import { revealTile, setGameButtonStatus } from '../../redux/actions/gameActions';
 import { createTilePosition } from '../../../common/utils';
 
 interface MapTileProps {
@@ -56,9 +56,15 @@ const MapTile: FC<MapTileProps> = (props) => {
         setThinking(false);
     }
 
-    useEffect( () => {
-
-    })
+    useEffect(() => {
+        if (isThinking) {
+            dispatch(setGameButtonStatus(GameStatus.SELECTING));
+        } else {
+            if (status !== GameStatus.GAME_OVER) {
+                dispatch(setGameButtonStatus(GameStatus.OK));
+            }
+        }
+    }, [isThinking])
 
     const getClassNames = () => {
         if (props.value !== TileValue.UNREVEALED) {

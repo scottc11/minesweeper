@@ -1,5 +1,5 @@
 import { GameClientType, GameStatus } from '../../../common/types';
-import { LOAD_GAME_DATA, NEW_GAME, REVEAL_TILE } from '../actions';
+import { LOAD_GAME_DATA, NEW_GAME, REVEAL_TILE, SET_GAME_BUTTON_STATUS } from '../actions';
 
 const initialState: GameClientType = {
     map: [],
@@ -14,6 +14,8 @@ function gameReducer(state = initialState, action: any) {
             return action.payload;
         case REVEAL_TILE:
             return action.payload;
+        case SET_GAME_BUTTON_STATUS:
+            return { ...state, status: action.payload }
         default:
             return state;
     }
