@@ -1,5 +1,12 @@
-$background-color: #282c34;
-$primary-text-color: white;
+$white: white;
+$gunmetal: #282c34ff;
+$glaucous: #7d8cc4ff;
+$ruby-red: #a41623ff;
+$orange-pantone: #f85e00ff;
+$minion-yellow: #fde74cff;
+
+$background-color: $gunmetal;
+$primary-text-color: $white;
 
 @import "./components/GameClock/GameClock.scss";
 
