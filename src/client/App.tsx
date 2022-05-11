@@ -11,13 +11,16 @@ function App() {
   return (
     <div className="app">
       <header className="app--header">MINESWEEPER</header>
-      <div className='game'>
-        <div className='game--header'>
-          <GameClock />
-          <NewGameButton status={game.status} />
-          <GameClock />
+      <div className='app--body'>
+        <div className='game'>
+          <div className='game--header'>
+            <GameClock />
+            <NewGameButton status={game.status} />
+            <GameClock />
+          </div>
+          <Map data={game.map} />
         </div>
-        <Map data={game.map} />
+        <div className='scores'>scores</div>
       </div>
     </div>
   );
