@@ -1,18 +1,24 @@
-import './App.css';
+import './App.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import NewGameButton from './components/NewGameButton/NewGameButton';
 import Map from './components/Map/Map';
+import GameClock from './components/GameClock/GameClock';
 
 function App() {
   const game = useSelector((state: RootState) => state.game);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <NewGameButton status={game.status}/>
+    <div className="app">
+      <header className="app--header">MINESWEEPER</header>
+      <div className='game'>
+        <div className='game--header'>
+          <GameClock />
+          <NewGameButton status={game.status} />
+          <GameClock />
+        </div>
         <Map data={game.map} />
-      </header>
+      </div>
     </div>
   );
 }
