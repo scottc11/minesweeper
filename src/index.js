@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { store } from './redux/store';
 import { Provider } from 'react-redux';
-import { initWebSocket } from './redux/mapSlice';
+import './client/index.scss';
+import App from './client/App';
+import reportWebVitals from './client/reportWebVitals';
+import { store } from './client/redux/store';
+import axios from 'axios';
+import { ServerURL } from './common/conf';
 
-store.dispatch(initWebSocket());
+// store.dispatch(); // new game
+
+axios.defaults.baseURL = `${ServerURL}`;
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'connect.sid'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

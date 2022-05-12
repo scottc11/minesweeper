@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Roboto+Mono:wght@100;400;700&family=Unica+One&display=swap');
+
+$bungee-shade: 'Bungee Shade', cursive;
+$unica-one: 'Unica One', cursive;
+$roboto-mono: 'Roboto Mono', monospace; // thin 100, reg 400, bold 700
+
+
+$white: white;
+$gunmetal: #282c34ff;
+$light-blue: #7d8cc4ff;
+$red: #a41623ff;
+$orange: #f85e00ff;
+$yellow: #fde74cff;
+
+$background-color: $gunmetal;
+$primary-text-color: $white;
+$tile-color: $gunmetal;
+$tile-opened-color: rgba(40, 44, 52, 0.7);

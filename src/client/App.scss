@@ -1,0 +1,69 @@
+@import "./styles/variables.scss";
+
+.app {
+  text-align: center;
+  font-family: $roboto-mono;
+  color: $primary-text-color;
+  background-color: $background-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  
+  &--header {
+    display: flex;
+    order: 1;
+    flex-grow: 1;
+    min-height: 200px;
+    max-height: 25vh;
+    align-items: center;
+    font-family: $bungee-shade;
+    color: $white;
+    font-size: 70px;
+  }
+
+  &--body {
+    display: flex;
+    max-height: 75vh;
+    order: 2;
+    flex-grow: 2;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--footer {
+    display: flex;
+    order: 3;
+  }
+}
+
+.scores {
+  // border: 1px solid white;
+}
+
+.game {
+  flex-shrink: 0;
+  &--header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.map {
+  display: grid;
+  background-color: gray;
+  border: 1px solid gray;
+  grid-template-columns: repeat(10, 40px);
+  grid-auto-rows: minmax(40px, auto);
+  grid-gap: 1px;
+}
+
+.new-game-btn {
+  color: white !important;
+  &:hover {
+    cursor: pointer;
+  }
+}

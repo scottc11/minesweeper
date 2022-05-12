@@ -1,0 +1,15 @@
+@import "../../styles/variables.scss";
+
+.game-rules {
+    width: 400px;
+    overflow: scroll;
+    text-align: left;
+
+    &--visible {
+        height: 100%;
+    }
+
+    &--toggle {
+        text-align: center;
+    }
+}
