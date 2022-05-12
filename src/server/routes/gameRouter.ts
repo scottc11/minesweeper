@@ -39,6 +39,20 @@ gameRouter.post('/reveal/:row-:col', (req, res, next) => {
     next();
 })
 
+gameRouter.post('/flag/:row-:col', (req, res, next) => {
+    const { row, col } = req.params;
+    const tile: TilePosition = { row: Number(row), col: Number(col) };
+    GAME.flag(tile);
+    next();
+})
+
+gameRouter.post('/removeflag/:row-:col', (req, res, next) => {
+    const { row, col } = req.params;
+    const tile: TilePosition = { row: Number(row), col: Number(col) };
+    GAME.removeFlag(tile);
+    next();
+})
+
 gameRouter.use((req, res, next) => {
     res.json(GAME.getClientAttributes());
 })

@@ -5,7 +5,8 @@ export interface TilePosition {
 
 export enum TileValue {
     MINE = "*",
-    UNREVEALED = "□"
+    UNREVEALED = "□",
+    FLAGGED = "p"
 }
 
 export type MapData = Array<Array<string>>;

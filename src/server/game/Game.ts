@@ -62,6 +62,14 @@ export class Game {
         }
     }
 
+    flag(tile: TilePosition) {
+        this.updateMap(tile, TileValue.FLAGGED);
+    }
+
+    removeFlag(tile: TilePosition) {
+        this.updateMap(tile, TileValue.UNREVEALED);
+    }
+
     updateMap(tile: TilePosition, value: TileValue | number ) {
         this.board[tile.row][tile.col] = String(value);
     }
