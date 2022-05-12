@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import './GameClock.scss';
 
 function numToClockString(num: number): string {
     if (num < 10) {
