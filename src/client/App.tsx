@@ -4,6 +4,7 @@ import { RootState } from './redux/store';
 import NewGameButton from './components/NewGameButton/NewGameButton';
 import Map from './components/Map/Map';
 import GameClock from './components/GameClock/GameClock';
+import GameMineCounter from './components/GameMineCounter/GameMineCounter';
 
 function App() {
   const game = useSelector((state: RootState) => state.game);
@@ -14,7 +15,7 @@ function App() {
       <div className='app--body'>
         <div className='game'>
           <div className='game--header'>
-            <GameClock />
+            <GameMineCounter />
             <NewGameButton status={game.status} />
             <GameClock />
           </div>
