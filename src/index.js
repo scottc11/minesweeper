@@ -7,8 +7,9 @@ import reportWebVitals from './client/reportWebVitals';
 import { store } from './client/redux/store';
 import axios from 'axios';
 import { ServerURL } from './common/conf';
+import { newGame } from './client/redux/actions/gameActions';
 
-// store.dispatch(); // new game
+store.dispatch(newGame()); // new game
 
 axios.defaults.baseURL = `${ServerURL}`;
 axios.defaults.withCredentials = true;
