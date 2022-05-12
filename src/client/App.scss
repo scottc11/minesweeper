@@ -2,6 +2,7 @@
 
 .app {
   text-align: center;
+  font-family: $roboto-mono;
   color: $primary-text-color;
   background-color: $background-color;
   min-height: 100vh;
@@ -15,20 +16,21 @@
     order: 1;
     flex-grow: 1;
     min-height: 200px;
+    max-height: 25vh;
     align-items: center;
     font-family: $bungee-shade;
     color: $white;
     font-size: 70px;
-    // border: 1px solid white;
   }
 
   &--body {
     display: flex;
+    max-height: 75vh;
     order: 2;
     flex-grow: 2;
-    // border: 1px solid white;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
   }
 
   &--footer {
@@ -42,6 +44,7 @@
 }
 
 .game {
+  flex-shrink: 0;
   &--header {
     display: flex;
     align-items: center;
