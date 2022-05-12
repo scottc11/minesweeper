@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Roboto+Mono:wght@100;400;700&family=Unica+One&display=swap');
+
+$bungee-shade: 'Bungee Shade', cursive;
+$unica-one: 'Unica One', cursive;
+$roboto-mono: 'Roboto Mono', monospace; // thin 100, reg 400, bold 700
+
+
 $white: white;
 $gunmetal: #282c34ff;
-$glaucous: #7d8cc4ff;
-$ruby-red: #a41623ff;
-$orange-pantone: #f85e00ff;
-$minion-yellow: #fde74cff;
+$light-blue: #7d8cc4ff;
+$red: #a41623ff;
+$orange: #f85e00ff;
+$yellow: #fde74cff;
 
 $background-color: $gunmetal;
 $primary-text-color: $white;
@@ -12,7 +19,6 @@ $primary-text-color: $white;
 
 .app {
   text-align: center;
-  font-size: calc(10px + 2vmin);
   color: $primary-text-color;
   background-color: $background-color;
   min-height: 100vh;
@@ -27,6 +33,9 @@ $primary-text-color: $white;
     flex-grow: 1;
     min-height: 200px;
     align-items: center;
+    font-family: $bungee-shade;
+    color: $white;
+    font-size: 70px;
     // border: 1px solid white;
   }
 
