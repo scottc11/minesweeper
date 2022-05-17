@@ -39,16 +39,15 @@
   }
 }
 
-.scores {
-  // border: 1px solid white;
-}
-
 .game {
   flex-shrink: 0;
   &--header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    & div {
+      width: 30%;
+    }
   }
 }
 
