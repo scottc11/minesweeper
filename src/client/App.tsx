@@ -41,7 +41,6 @@ function App() {
         </div>
       </div>
       <div className='app--footer'>
-s
       </div>
     </div>
   );

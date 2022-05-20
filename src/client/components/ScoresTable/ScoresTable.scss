@@ -1,0 +1,20 @@
+@import "../../styles/variables.scss";
+
+.scores-table {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    box-sizing: content-box;
+
+    &--visible {
+        height: 100%;
+    }
+
+    &--text {
+        flex-grow: 0;
+        max-height: 300px;
+        padding: 10px;
+        overflow: scroll;
+    }
+}
