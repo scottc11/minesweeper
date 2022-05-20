@@ -25,6 +25,7 @@
 
     &--text {
         flex-grow: 0;
+        max-height: 300px;
         padding: 10px;
         overflow: scroll;
     }
