@@ -1,12 +1,17 @@
 import axios from "axios";
 import { AnyAction } from "redux";
-import { FLAG_TILE, LOAD_GAME_DATA, NEW_GAME, REMOVE_FLAG, REVEAL_TILE, SET_GAME_BUTTON_STATUS } from ".";
+import { FLAG_TILE, INCREMENT_GAME_CLOCK, LOAD_GAME_DATA, NEW_GAME, REMOVE_FLAG, RESET_GAME_CLOCK, REVEAL_TILE, SET_GAME_BUTTON_STATUS, START_GAME_CLOCK, STOP_GAME_CLOCK } from ".";
 import { ServerURL } from "../../../common/conf";
 import { GameClientType, GameStatus, TilePosition } from "../../../common/types";
 import { AppDispatch, RootState } from "../store";
 
-export function newGame() {
-    return postDataToServer(`${ServerURL}api/games/new`);
+export function newGame(): any {
+    return async (dispatch: AppDispatch) => {
+        dispatch(resetGameClock());
+        dispatch(startGameClock());
+        const response = await axios.post(`${ServerURL}api/games/new`);
+        dispatch({ type: LOAD_GAME_DATA, payload: response.data });
+    }
 }
 
 export const loadGameData = (data: GameClientType) => {
@@ -50,5 +55,29 @@ export function setGameButtonStatus(status: GameStatus) {
     return {
         type: SET_GAME_BUTTON_STATUS,
         payload: status
+    }
+}
+
+export function incrementGameClock() {
+    return {
+        type: INCREMENT_GAME_CLOCK
+    }
+}
+
+export function stopGameClock() {
+    return {
+        type: STOP_GAME_CLOCK
+    }
+}
+
+export function startGameClock() {
+    return {
+        type: START_GAME_CLOCK
+    }
+}
+
+export function resetGameClock() {
+    return {
+        type: RESET_GAME_CLOCK
     }
 }
