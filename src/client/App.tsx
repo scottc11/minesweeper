@@ -9,6 +9,7 @@ import GameRules from './components/GameRules/GameRules';
 import { GameStatus } from '../common/types';
 import { stopGameClock } from './redux/actions/gameActions';
 import { useEffect } from 'react';
+import ScoresTable from './components/ScoresTable/ScoresTable';
 
 function App() {
   const game = useSelector((state: RootState) => state.game);
@@ -35,7 +36,9 @@ function App() {
           </div>
           <Map data={game.map} />
         </div>
-        <div className='app--body--scores-container'>scores</div>
+        <div className='app--body--scores-container'>
+          <ScoresTable />
+        </div>
       </div>
       <div className='app--footer'>
 s

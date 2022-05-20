@@ -1,9 +1,8 @@
 import { Button, Slide } from "@mui/material";
-import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
-import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import { FC, useState } from "react";
 import './GameRules.scss';
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+import VerticalButton from "../VerticalButton/VerticalButton";
 
 const GameRules: FC = (props) => {
     const [visible, setVisibility] = useState(false);
@@ -33,9 +32,7 @@ const GameRules: FC = (props) => {
                 </div>
             </Slide>
             <div className="game-rules--toggle">
-                <Button onClick={() => setVisibility(!visible)}>
-                    <span>RULES {visible ? <ArrowLeft /> : <ArrowRight />}</span>
-                </Button>
+                <VerticalButton label="RULES" orientation="left" active={visible} onClick={() => setVisibility(!visible)} />
             </div>
         </div>
     )
