@@ -9,6 +9,7 @@ import GameRules from './components/GameRules/GameRules';
 import { GameStatus } from '../common/types';
 import { stopGameClock } from './redux/actions/gameActions';
 import { useEffect } from 'react';
+import ScoresTable from './components/ScoresTable/ScoresTable';
 
 function App() {
   const game = useSelector((state: RootState) => state.game);
@@ -24,7 +25,10 @@ function App() {
     <div className="app">
       <header className="app--header">MINESWEEPER</header>
       <div className='app--body'>
-        <div className='game'>
+        <div className='app--body--rules-container'>
+          <GameRules />
+        </div>
+        <div className='app--body--game-container'>
           <div className='game--header'>
             <GameMineCounter />
             <NewGameButton status={game.status} />
@@ -32,8 +36,11 @@ function App() {
           </div>
           <Map data={game.map} />
         </div>
-        {/* <div className='scores'>scores</div> */}
-        <GameRules />
+        <div className='app--body--scores-container'>
+          <ScoresTable />
+        </div>
+      </div>
+      <div className='app--footer'>
       </div>
     </div>
   );

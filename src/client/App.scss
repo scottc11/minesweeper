@@ -1,5 +1,20 @@
 @import "./styles/variables.scss";
 
+.accent {
+  &--blue {
+    color: $light-blue;
+  }
+  &--red {
+    color: $red;
+  }
+  &--yellow {
+    color: $yellow;
+  }
+  &--orange {
+    color: $orange;
+  }
+}
+
 .app {
   text-align: center;
   font-family: $roboto-mono;
@@ -25,22 +40,40 @@
 
   &--body {
     display: flex;
-    max-height: 75vh;
+    // max-height: 75vh;
+    width: 100vw;
     order: 2;
     flex-grow: 2;
-    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    &--rules-container {
+      flex-grow: 1;
+      order: 1;
+    }
+
+    &--game-container {
+      order: 2;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+
+    &--scores-container {
+      order: 3;
+      flex-grow: 1;
+    }
   }
 
   &--footer {
+    height: 20vh;
     display: flex;
     order: 3;
   }
 }
 
 .game {
-  flex-shrink: 0;
   &--header {
     display: flex;
     align-items: center;
