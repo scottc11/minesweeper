@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
     "target": "es5",
     "lib": [
       "dom",
@@ -13,12 +16,12 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": false,
+    "sourceMap": true,
+    "jsx": "react-jsx",
   },
   "ts-node": {
     // these options are overrides used only by ts-node

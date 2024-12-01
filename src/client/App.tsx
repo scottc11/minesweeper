@@ -1,4 +1,3 @@
-import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import NewGameButton from './components/NewGameButton/NewGameButton';
@@ -10,6 +9,7 @@ import { GameStatus } from '../common/types';
 import { stopGameClock } from './redux/actions/gameActions';
 import { useEffect } from 'react';
 import ScoresTable from './components/ScoresTable/ScoresTable';
+import './App.scss';
 
 function App() {
   const game = useSelector((state: RootState) => state.game);

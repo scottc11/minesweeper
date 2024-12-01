@@ -13,3 +13,8 @@ npm install
 npm run ts-watch-server
 npm run start
 ```
+
+## .env file
+
+SERVER_PORT: port serving the application
+SERVER_DOMAIN: domain of server
